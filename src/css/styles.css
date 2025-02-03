@@ -3,3 +3,48 @@
     padding: 0;
     box-sizing: border-box;
 }
+
+.nav-menu {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.logo-icon {
+    width: 52px;
+    height: 52px;
+}
+
+.header-tabs {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    list-style: none;
+    text-transform: uppercase;
+}
+
+.header-tabs-link {
+    text-decoration: none;
+    color: black;
+}
+
+.mobile-menu-btn {
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+}
+
+.menu-icon {
+    width: 32px;
+    height: 32px;
+}
+
+/* @media (min-width: 768px) {
+    .header-tabs {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        list-style: none;
+        text-transform: uppercase;
+    }
+} */
