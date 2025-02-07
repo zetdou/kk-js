@@ -22,8 +22,9 @@ function startSetInterval() {
 
 startSetInterval();
 
-let  className = "sticky-header-bg";
-let scrollTrigger = "120";
+let originClass = "header";
+let scrollClass = "headerScroll";
+let scrollTrigger = "100";
 
 // With add inline style not by class
 // const header = document.querySelector("header");
@@ -35,10 +36,13 @@ let scrollTrigger = "120";
 //         header.style.removeProperty("background");
 //     }
 
+
 window.onscroll = function() {
     if(window.scrollY >= scrollTrigger) {
-        document.querySelector("header").classList.add(className);
+        document.querySelector("header").classList.add(scrollClass);
+        document.querySelector("header").classList.remove(originClass);
      } else {
-        document.querySelector("header").classList.remove(className);        
+        document.querySelector("header").classList.add(originClass);
+        document.querySelector("header").classList.remove(scrollClass);        
     }
 };
