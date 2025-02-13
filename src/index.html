@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Komitet kofeinowy</title>
-    <script src="./scripts/index.js" defer></script>
     <link rel="stylesheet" href="./css/styles.css"/>
 </head>
 <body>
@@ -76,33 +75,57 @@
         <div class="shop-container">
             <ul class="shop-list">
                 <li class="shop-list-item">
-                    <img class="item-image" height="320px" width="320px" class="shop-list-item-image" src="./images/komitet-shop-item1.jpg" alt="shop item" />
-                    <div class="shop-list-info"></div>  
+                    <a href="">
+                        <img class="item-image" height="320px" width="320px" class="shop-list-item-image" src="./images/komitet-shop-item1.jpg" alt="shop item" />
+                        <div class="shop-list-info">
+                            <a href=""><p>Kawa</p></a>
+                            <h3>Brazylia Fazenda Monjolo</h3>
+                            <button class="openCartModal">Wybierz opcje</button>
+                        </div>  
+                    </a>
                 </li>
                 <li class="shop-list-item">
-                    <img class="item-image" height="320px" width="320px" class="shop-list-item-image" src="./images/komitet-shop-item2.jpg" alt="shop item" />
-                    <div class="shop-list-info"></div> 
+                    <a href="">
+                        <img class="item-image" height="320px" width="320px" class="shop-list-item-image" src="./images/komitet-shop-item2.jpg" alt="shop item" />
+                        <div class="shop-list-info">
+                            <a href=""><p>Kawa</p></a>
+                            <h3>Honduras El fuente</h3>
+                            <button class="openCartModal">Wybierz opcje</button>
+                        </div> 
+                    </a>
                 </li>
                 <li class="shop-list-item">
-                    <img class="item-image" height="320px" width="320px" class="shop-list-item-image" src="./images/komitet-shop-item3.jpg" alt="shop item"/>
-                    <div class="shop-list-info">
-                        <a href=""><p>Kawa</p></a>
-                        <h3>Gwatemala Very Berry</h3>
-                        <label for="itemQuantity">Wybierz wariant:</label>
-                        <select id="itemQuantity">
-                            <option value="250g">250g</option>
-                            <option value="500g">500g</option>
-                            <option value="1kg">1kg</option>
-                        </select>
-                        <p>100 zł</p>
-                        <button class="addToCartBtn">
-                            Do koszyka
-                        </button>        
-                    </div> 
+                    <a href="">
+                        <img class="item-image" height="320px" width="320px" class="shop-list-item-image" src="./images/komitet-shop-item3.jpg" alt="shop item"/>
+                        <div class="shop-list-info">
+                            <a href=""><p>Kawa</p></a>
+                            <h3>Gwatemala Very Berry</h3>
+                            <!-- <label for="itemQuantity">Wybierz wariant:</label>
+                            <select id="itemQuantity">
+                                <option value="250g">250g</option>
+                                <option value="500g">500g</option>
+                                <option value="1kg">1kg</option>
+                            </select>
+                            <p>100 zł</p> -->
+                            <button class="openCartModal">
+                                Wybierz opcje
+                            </button>        
+                        </div> 
+                    </a>
                 </li>
             </ul>
         </div>
     </main>
     <footer></footer>
+    <div class="backdrop isHidden">
+        <div class="modal" open>
+            <button class="closeBtn">
+                <svg>
+                    <use></use>
+                </svg>
+            </button>
+        </div>
+    </div>
+    <script src="./scripts/index.js" defer></script>
 </body>
 </html>

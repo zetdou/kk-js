@@ -46,3 +46,13 @@ window.onscroll = function() {
         document.querySelector("header").classList.remove(scrollClass);        
     }
 };
+
+const openModalBtn = document.querySelectorAll('.openCartModal')
+const modal = document.querySelector('[open]');
+
+openModalBtn.forEach(btn => {
+    btn.addEventListener('click', toggleModal)
+})
+function toggleModal() {
+    modal.classList.toggle('isHidden');
+}
