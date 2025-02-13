@@ -48,11 +48,11 @@ window.onscroll = function() {
 };
 
 const openModalBtn = document.querySelectorAll('.openCartModal')
-const modal = document.querySelector('[open]');
+const modal = document.querySelector('[modalOpen]');
 
 openModalBtn.forEach(btn => {
     btn.addEventListener('click', toggleModal)
-})
+});
 function toggleModal() {
     modal.classList.toggle('isHidden');
 }
