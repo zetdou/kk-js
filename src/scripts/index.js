@@ -27,7 +27,7 @@ startSetInterval();
 
 let originClass = "header";
 let scrollClass = "headerScroll";
-let scrollTrigger = 250;
+let scrollTrigger = 180;
 
 // With add inline style not by class
 // const header = document.querySelector("header");
@@ -49,12 +49,34 @@ window.onscroll = function () {
   }
 };
 
-const openModalBtn = document.querySelectorAll(".openCartModal");
-const modal = document.querySelector("[modalOpen]");
+// Open quick shopping modal window
+const openModal = document.querySelectorAll(".openCartModal");
+openModal.forEach((btn) => {
+  const modal = document.querySelector("[modalOpen]");
+  const modalClose = document.querySelector("[modalClose]");
 
-openModalBtn.forEach((btn) => {
-  btn.addEventListener("click", toggleModal);
+  function open() {
+    modal.classList.toggle("isHidden");
+    document.addEventListener("keydown", keyClose);
+    modal.addEventListener("click", clickOutClose);
+  }
+
+  function close() {
+    modal.classList.toggle("isHidden");
+    document.removeEventListener("keydown", keyClose);
+  }
+
+  function keyClose(ev) {
+    if (ev.key === "Escape" && !modal.classList.contains("isHidden")) {
+      close();
+    }
+  }
+
+  function clickOutClose(ev) {
+    if (ev.target === modal || ev.target.classList.contains("isHidden")) {
+      close();
+    }
+  }
+  btn.addEventListener("click", open);
+  modalClose.addEventListener("click", close);
 });
-function toggleModal() {
-  modal.classList.toggle("isHidden");
-}
