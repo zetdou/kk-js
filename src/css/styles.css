@@ -45,12 +45,31 @@
   align-items: center;
   gap: 12px;
   list-style: none;
-  text-transform: uppercase;
+  text-transform: lowercase;
 }
 
 .header-tabs-link {
   text-decoration: none;
   color: #fff;
+}
+
+.basket-btn {
+  border: none;
+  cursor: pointer;
+}
+
+.basket-icon {
+  width: 32px;
+  height: 32px;
+}
+
+.quickBasket {
+  position: fixed;
+  width: 30%;
+  height: 100%;
+  background: #fff;
+  top: 0%;
+  left: 70%;
 }
 
 .mobile-menu-btn {
@@ -161,4 +180,13 @@
 .shop-list {
   display: flex;
   list-style: none;
+  justify-content: center;
+  align-items: center;
+}
+
+.shop-list-item {
+  border: solid 1px #000;
+  border-radius: 10%;
+  width: 320px;
+  height: 400px;
 }

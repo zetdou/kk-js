@@ -26,7 +26,12 @@
                     <li><a class="header-tabs-link" href="index.html">Kontakt</a></li>
                 </ul>
                 <div class="mobile-menu">
-                    <button class="mobile-menu-btn">
+                    <button class="basket-btn">
+                        <svg class="basket-icon">
+                            <use></use>
+                        </svg>
+                    </button>
+                    <button class="mobile-menu-btn" dataMobileMenu>
                         <svg class="menu-icon">
                             <use href="images/icons.svg#icon-menu"></use>
                         </svg>
@@ -112,13 +117,6 @@
                                 <p>Kawa</p>
                             </a>
                             <h3>Gwatemala Very Berry</h3>
-                            <!-- <label for="itemQuantity">Wybierz wariant:</label>
-                            <select id="itemQuantity">
-                                <option value="250g">250g</option>
-                                <option value="500g">500g</option>
-                                <option value="1kg">1kg</option>
-                            </select>
-                            <p>100 zł</p> -->
                             <button class="openCartModal">
                                 Wybierz opcje
                             </button>
@@ -137,6 +135,29 @@
                 </svg>
             </button>
             <p>Test 123</p>
+            <label for="itemQuantity">Wybierz wariant:</label>
+            <select id="itemQuantity">
+                <option value="250g">250g</option>
+                <option value="500g">500g</option>
+                <option value="1kg">1kg</option>
+            </select>
+            <button>Do koszyka</button>
+        </div>
+    </div>
+    <div class="backdrop isHidden" dataBasket>
+        <div class="quickBasket">
+            <button class="quickBasketBtn"></button>
+            <button class="quickBasketHide"></button>
+            <div class="quickBasketInfo">
+                <a href="">
+                    <p>Nazwa</p>
+                    <p>Waga</p>
+                    <p>Ilość</p>
+                </a>
+                <p>Suma: </p>
+                <span class="quickBasketTotal">zł</span>
+            </div>
+            <button class="quickBasketOrder">Zamówienie</button>
         </div>
     </div>
     <script src="./scripts/index.js" defer></script>

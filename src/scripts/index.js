@@ -80,3 +80,16 @@ openModal.forEach((btn) => {
   btn.addEventListener("click", open);
   modalClose.addEventListener("click", close);
 });
+
+const quickBasketBtn = document.querySelector(".basket-btn");
+const showQuickBasket = document.querySelector("[dataBasket");
+const closeQuickBasket = document.querySelector(".quickBasketHide");
+
+quickBasketBtn.addEventListener("click", show);
+closeQuickBasket.addEventListener("click", close);
+function show() {
+  showQuickBasket.classList.toggle("isHidden");
+}
+function close() {
+  showQuickBasket.classList.toggle("isHidden");
+}
