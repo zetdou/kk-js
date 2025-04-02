@@ -182,11 +182,11 @@
   list-style: none;
   justify-content: center;
   align-items: center;
+  flex-wrap: wrap;
+  gap: 16px;
 }
 
 .shop-list-item {
-  border: solid 1px #000;
-  border-radius: 10%;
   width: 320px;
   height: 400px;
 }
