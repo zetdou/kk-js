@@ -20,9 +20,9 @@ const fetchProducts = async () => {
           <div class="shop-list-info">
             <p>${element.category}</p>
             <h3>${element.name}</h3>
-            <button class="openCartModal">Wybierz opcje</button>
           </div>
         </a>
+        <button class="openCartModal">Wybierz opcje</button>
       `;
 
       shopList.appendChild(productShoppingCart);

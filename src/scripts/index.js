@@ -50,20 +50,24 @@ window.onscroll = function () {
 };
 
 // Open quick shopping modal window
-const openModal = document.querySelectorAll(".openCartModal");
-openModal.forEach((btn) => {
+const shopList = document.querySelector(".shop-list");
+shopList.addEventListener("click", function (ev) {
   const modal = document.querySelector("[modalOpen]");
   const modalClose = document.querySelector("[modalClose]");
 
-  function open() {
-    modal.classList.toggle("isHidden");
-    document.addEventListener("keydown", keyClose);
-    modal.addEventListener("click", clickOutClose);
+  if (ev.target.closest(".openCartModal")) {
+    openModal(modal, modalClose);
   }
+});
+
+function openModal(modal, modalClose) {
+  modal.classList.toggle("isHidden");
 
   function close() {
     modal.classList.toggle("isHidden");
     document.removeEventListener("keydown", keyClose);
+    modal.removeEventListener("click", clickOutClose);
+    modalClose.removeEventListener("click", close);
   }
 
   function keyClose(ev) {
@@ -77,9 +81,10 @@ openModal.forEach((btn) => {
       close();
     }
   }
-  btn.addEventListener("click", open);
+  document.addEventListener("keydown", keyClose);
+  modal.addEventListener("click", clickOutClose);
   modalClose.addEventListener("click", close);
-});
+}
 
 const quickBasketBtn = document.querySelector(".basket-btn");
 const showQuickBasket = document.querySelector("[dataBasket");
