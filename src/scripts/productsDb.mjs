@@ -1,14 +1,13 @@
 import axios from "axios";
 
 const productsDb = process.env.DB_BASE_URL;
-let products;
+export let products;
 
 export const fetchProducts = async () => {
   const productsDb = process.env.DB_BASE_URL;
   try {
     const res = await axios.get(productsDb);
     products = res.data;
-    console.log("value of products:", products);
     return products;
   } catch (err) {
     console.err("Error fetching products: ", err);
@@ -20,7 +19,6 @@ export const createProductCart = async () => {
   await fetchProducts();
   const shopList = document.querySelector(".shop-list");
   shopList.innerHTML = "";
-  console.log(products);
 
   products.forEach((element) => {
     const shoppingCart = document.createElement("li");

@@ -92,14 +92,7 @@
                     <use></use>
                 </svg>
             </button>
-            <div class="modal-content">
-                <h2 class="modal-title"></h2>
-                <p class="modal-description"></p>
-                <select class="modal-variant"></select>
-                <p class="modal-price"></p>
-                <button class="modal-add-to-cart">Do koszyka</button>
-                <!-- np. na przyszłość: <div class="modal-reviews"></div> -->
-            </div>
+            <div class="modal-content"></div>
         </div>
     </div>
     <div class="backdrop isHidden" dataBasket>
@@ -107,16 +100,15 @@
             <button class="quickBasketBtn"></button>
             <button class="quickBasketHide"></button>
             <div class="quickBasketInfo">
-                <a href="">
-                    <p>Nazwa</p>
-                    <p>Waga</p>
-                    <p>Ilość</p>
-                </a>
+                <p>Nazwa</p>
+                <p>Waga</p>
+                <p>Ilość</p>
                 <p>Suma: </p>
                 <span class="quickBasketTotal">zł</span>
+                <button class="quickBasketOrder">Zamówienie</button>
             </div>
-            <button class="quickBasketOrder">Zamówienie</button>
         </div>
+    </div>
     </div>
     <script defer type="module" src="./scripts/productsDb.mjs"></script>
     <script defer type="module" src="./scripts/slider.mjs"></script>
