@@ -3,9 +3,8 @@
   "version": "1.0.0",
   "description": "",
   "type": "module",
-  "default": "index.js",
   "scripts": {
-    "start": "parcel ./src/index.html"
+    "start": "parcel ./src/*.html"
   },
   "keywords": [],
   "author": "",

@@ -1,9 +1,10 @@
+import { fetchProducts } from "./productsDb.mjs";
+
 // Open quick shopping modal window
 const shopList = document.querySelector(".shop-list");
 shopList.addEventListener("click", function (ev) {
   const modal = document.querySelector("[modalOpen]");
   const modalClose = document.querySelector("[modalClose]");
-
   if (ev.target.closest(".openCartModal")) {
     openModal(modal, modalClose);
   }

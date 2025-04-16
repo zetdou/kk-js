@@ -3,7 +3,7 @@ import axios from "axios";
 const productsDb = process.env.DB_BASE_URL;
 let products;
 
-const fetchProducts = async () => {
+export const fetchProducts = async () => {
   const productsDb = process.env.DB_BASE_URL;
   try {
     const res = await axios.get(productsDb);
@@ -26,9 +26,10 @@ export const createProductCart = async () => {
     const shoppingCart = document.createElement("li");
     shoppingCart.classList.add("shop-list-item");
 
+    let imgURL = `http://127.0.0.1:3000${element.image}`;
     shoppingCart.innerHTML = `
         <a href="#">
-          <img class="item-image" height="320px" width="320px" src="${element.image}" alt="${element.name}" />
+          <img class="item-image" height="320px" width="320px" src="${imgURL}" alt="${element.name}" />
           <div class="shop-list-info">
             <p>${element.category}</p>
             <h3>${element.name}</h3>
@@ -41,7 +42,7 @@ export const createProductCart = async () => {
   });
   return;
 };
-// createProductCart();
+
 document.addEventListener("DOMContentLoaded", async () => {
   try {
     createProductCart();

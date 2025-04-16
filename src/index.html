@@ -81,49 +81,7 @@
     <main>
         <h1>Sklep</h1>
         <div class="shop-container">
-            <ul class="shop-list">
-                <!-- <li class="shop-list-item">
-                    <a href="">
-                        <img class="item-image" height="320px" width="320px" class="shop-list-item-image"
-                            src="./images/komitet-shop-item1.jpg" alt="shop item" />
-                        <div class="shop-list-info">
-                            <a href="">
-                                <p>Kawa</p>
-                            </a>
-                            <h3>Brazylia Fazenda Monjolo</h3>
-                            <button class="openCartModal">Wybierz opcje</button>
-                        </div>
-                    </a>
-                </li>
-                <li class="shop-list-item">
-                    <a href="">
-                        <img class="item-image" height="320px" width="320px" class="shop-list-item-image"
-                            src="./images/komitet-shop-item2.jpg" alt="shop item" />
-                        <div class="shop-list-info">
-                            <a href="">
-                                <p>Kawa</p>
-                            </a>
-                            <h3>Honduras El fuente</h3>
-                            <button class="openCartModal">Wybierz opcje</button>
-                        </div>
-                    </a>
-                </li>
-                <li class="shop-list-item">
-                    <a href="">
-                        <img class="item-image" height="320px" width="320px" class="shop-list-item-image"
-                            src="./images/komitet-shop-item3.jpg" alt="shop item" />
-                        <div class="shop-list-info">
-                            <a href="">
-                                <p>Kawa</p>
-                            </a>
-                            <h3>Gwatemala Very Berry</h3>
-                            <button class="openCartModal">
-                                Wybierz opcje
-                            </button>
-                        </div>
-                    </a>
-                </li> -->
-            </ul>
+            <ul class="shop-list"></ul>
         </div>
     </main>
     <footer></footer>
@@ -134,14 +92,14 @@
                     <use></use>
                 </svg>
             </button>
-            <p>Test 123</p>
-            <label for="itemQuantity">Wybierz wariant:</label>
-            <select id="itemQuantity">
-                <option value="250g">250g</option>
-                <option value="500g">500g</option>
-                <option value="1kg">1kg</option>
-            </select>
-            <button>Do koszyka</button>
+            <div class="modal-content">
+                <h2 class="modal-title"></h2>
+                <p class="modal-description"></p>
+                <select class="modal-variant"></select>
+                <p class="modal-price"></p>
+                <button class="modal-add-to-cart">Do koszyka</button>
+                <!-- np. na przyszłość: <div class="modal-reviews"></div> -->
+            </div>
         </div>
     </div>
     <div class="backdrop isHidden" dataBasket>
@@ -160,10 +118,10 @@
             <button class="quickBasketOrder">Zamówienie</button>
         </div>
     </div>
-    <script type="module" src="./scripts/slider.js" defer></script>
-    <script type="module" src="./scripts/changingHeaderBg.js" defer></script>
-    <script type="module" src="./scripts/modal.js" defer></script>
-    <script type="module" src="./scripts/productsDb.js" defer></script>
+    <script defer type="module" src="./scripts/productsDb.mjs"></script>
+    <script defer type="module" src="./scripts/slider.mjs"></script>
+    <script defer type="module" src="./scripts/changingHeaderBg.mjs"></script>
+    <script defer type="module" src="./scripts/modal.mjs"></script>
 </body>
 
 </html>
