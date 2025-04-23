@@ -75,23 +75,47 @@ function createModalContent(item) {
   variantSelect.addEventListener("change", (ev) => {
     priceDisplay.textContent = `${ev.target.value} zł`;
   });
-}
 
-// const addToCart = document.querySelector(".modal-add-to-cart");
-// addToCart.addEventListener("click", (ev) => {
-//   openModal();
-//   show();
-// });
+  const addToCart = document.querySelector(".modal-add-to-cart");
+  addToCart.addEventListener("click", () => {
+    const selectedIndex = variantSelect.selectedIndex;
+    const selectedVariant = item.variants[selectedIndex];
+
+    const modal = document.querySelector("[modalOpen]");
+    modal.classList.add("isHidden");
+
+    openQuickBasket({
+      name: item.name,
+      size: selectedVariant.size,
+      price: selectedVariant.price,
+      quantity: 1,
+    });
+  });
+}
 
 const quickBasketBtn = document.querySelector(".basket-btn");
-const showQuickBasket = document.querySelector("[dataBasket");
 const closeQuickBasket = document.querySelector(".quickBasketHide");
 
-quickBasketBtn.addEventListener("click", show);
-closeQuickBasket.addEventListener("click", close);
-function show() {
-  showQuickBasket.classList.toggle("isHidden");
+const quickBasket = document.querySelector("[dataBasket");
+const quickBasketInfo = document.querySelector(".quickBasketInfo");
+
+quickBasketBtn.addEventListener("click", showQB);
+closeQuickBasket.addEventListener("click", closeQB);
+function showQB() {
+  quickBasket.classList.toggle("isHidden");
 }
-function close() {
-  showQuickBasket.classList.toggle("isHidden");
+function closeQB() {
+  quickBasket.classList.toggle("isHidden");
+}
+
+function openQuickBasket({ name, size, price, quantity }) {
+  showQB();
+
+  quickBasketInfo.innerHTML = `
+  <p>${name} - ${size}</p>
+  <p>Ilość: ${quantity}</p>
+  <p>Suma:</p>
+  <span class="quickBasketTotal">${price * quantity} zł</span>
+  <button class="quickBasketOrder>Zamówienie</button>"
+  `;
 }
