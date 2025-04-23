@@ -42,6 +42,8 @@ function openModal(modal, modalClose) {
   modalClose.addEventListener("click", close);
 }
 
+let basket = JSON.parse(localStorage.getItem("basket")) || [];
+
 function createModalContent(item) {
   const modalContent = document.querySelector(".modal-content");
 
@@ -78,18 +80,34 @@ function createModalContent(item) {
 
   const addToCart = document.querySelector(".modal-add-to-cart");
   addToCart.addEventListener("click", () => {
+    const selectedOption = variantSelect.options[variantSelect.selectedIndex];
     const selectedIndex = variantSelect.selectedIndex;
     const selectedVariant = item.variants[selectedIndex];
+    const selectedPrice = parseFloat(selectedOption.value);
+
+    const existingProduct = basket.find(
+      (element) =>
+        element.id === item.id && element.variant.size === selectedVariant.size
+    );
+
+    if (existingProduct) {
+      existingProduct.quantity += 1;
+    } else {
+      basket.push({
+        id: item.id,
+        name: item.name,
+        variant: selectedVariant,
+        quantity: 1,
+        price: selectedPrice,
+      });
+    }
+
+    localStorage.setItem("basket", JSON.stringify(basket));
 
     const modal = document.querySelector("[modalOpen]");
     modal.classList.add("isHidden");
 
-    openQuickBasket({
-      name: item.name,
-      size: selectedVariant.size,
-      price: selectedVariant.price,
-      quantity: 1,
-    });
+    openQuickBasket();
   });
 }
 
@@ -97,7 +115,6 @@ const quickBasketBtn = document.querySelector(".basket-btn");
 const closeQuickBasket = document.querySelector(".quickBasketHide");
 
 const quickBasket = document.querySelector("[dataBasket");
-const quickBasketInfo = document.querySelector(".quickBasketInfo");
 
 quickBasketBtn.addEventListener("click", showQB);
 closeQuickBasket.addEventListener("click", closeQB);
@@ -108,14 +125,35 @@ function closeQB() {
   quickBasket.classList.toggle("isHidden");
 }
 
-function openQuickBasket({ name, size, price, quantity }) {
+function openQuickBasket() {
+  const quickBasketContent = document.querySelector(".quickBasketDetails");
+
   showQB();
 
-  quickBasketInfo.innerHTML = `
-  <p>${name} - ${size}</p>
-  <p>Ilość: ${quantity}</p>
-  <p>Suma:</p>
-  <span class="quickBasketTotal">${price * quantity} zł</span>
-  <button class="quickBasketOrder>Zamówienie</button>"
-  `;
+  quickBasketContent.innerHTML = "";
+
+  let total = 0;
+
+  basket.forEach((product) => {
+    const details = document.createElement("div");
+    details.classList.add("quickBasketItems");
+    details.innerHTML = `
+    <p>${product.name} (${product.variant.size})</p>
+    <p>${product.quantity}</p>
+    <p>${product.price * product.quantity} zł</p>`;
+
+    quickBasketContent.appendChild(details);
+    total += product.price * product.quantity;
+  });
+
+  const totalSpan = document.createElement("span");
+  totalSpan.classList.add("quickBasketTotal");
+  totalSpan.textContent = `Suma: ${total} zł`;
+
+  const orderBtn = document.createElement("button");
+  orderBtn.classList.add("quickBasketOrder");
+  orderBtn.textContent = "Zamówienie";
+
+  quickBasketContent.appendChild(totalSpan);
+  quickBasketContent.appendChild(orderBtn);
 }
