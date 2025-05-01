@@ -107,7 +107,8 @@ function createModalContent(item) {
     const modal = document.querySelector("[modalOpen]");
     modal.classList.add("isHidden");
 
-    openQuickBasket();
+    renderQuickBasket();
+    showQB();
   });
 }
 
@@ -125,16 +126,15 @@ function closeQB() {
   quickBasket.classList.toggle("isHidden");
 }
 
-function openQuickBasket() {
+function renderQuickBasket() {
   const quickBasketContent = document.querySelector(".quickBasketDetails");
-
-  showQB();
+  const storedBasket = JSON.parse(localStorage.getItem("basket")) || [];
 
   quickBasketContent.innerHTML = "";
 
   let total = 0;
 
-  basket.forEach((product) => {
+  storedBasket.forEach((product) => {
     const details = document.createElement("div");
     details.classList.add("quickBasketItems");
     details.innerHTML = `
@@ -146,14 +146,20 @@ function openQuickBasket() {
     total += product.price * product.quantity;
   });
 
-  const totalSpan = document.createElement("span");
-  totalSpan.classList.add("quickBasketTotal");
-  totalSpan.textContent = `Suma: ${total} zł`;
+  if (storedBasket.length > 0) {
+    const totalSpan = document.createElement("span");
+    totalSpan.classList.add("quickBasketTotal");
+    totalSpan.textContent = `Suma: ${total} zł`;
 
-  const orderBtn = document.createElement("button");
-  orderBtn.classList.add("quickBasketOrder");
-  orderBtn.textContent = "Zamówienie";
+    const orderBtn = document.createElement("button");
+    orderBtn.classList.add("quickBasketOrder");
+    orderBtn.textContent = "Zamówienie";
 
-  quickBasketContent.appendChild(totalSpan);
-  quickBasketContent.appendChild(orderBtn);
+    quickBasketContent.appendChild(totalSpan);
+    quickBasketContent.appendChild(orderBtn);
+  }
 }
+
+document.addEventListener("DOMContentLoaded", () => {
+  renderQuickBasket();
+});
