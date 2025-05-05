@@ -44,6 +44,10 @@ function openModal(modal, modalClose) {
 
 let basket = JSON.parse(localStorage.getItem("basket")) || [];
 
+function syncBasketFromStorage() {
+  basket = JSON.parse(localStorage.getItem("basket")) || [];
+}
+
 function createModalContent(item) {
   const modalContent = document.querySelector(".modal-content");
 
@@ -80,6 +84,8 @@ function createModalContent(item) {
 
   const addToCart = document.querySelector(".modal-add-to-cart");
   addToCart.addEventListener("click", () => {
+    syncBasketFromStorage();
+
     const selectedOption = variantSelect.options[variantSelect.selectedIndex];
     const selectedIndex = variantSelect.selectedIndex;
     const selectedVariant = item.variants[selectedIndex];
@@ -128,36 +134,83 @@ function closeQB() {
 
 function renderQuickBasket() {
   const quickBasketContent = document.querySelector(".quickBasketDetails");
-  const storedBasket = JSON.parse(localStorage.getItem("basket")) || [];
+  let storedBasket = JSON.parse(localStorage.getItem("basket")) || [];
 
   quickBasketContent.innerHTML = "";
 
+  if (storedBasket.length === 0) {
+    quickBasketContent.innerHTML = `<p class="emptyQB">Twój koszyk jest pusty.</p>`;
+  }
+
   let total = 0;
 
-  storedBasket.forEach((product) => {
-    const details = document.createElement("div");
-    details.classList.add("quickBasketItems");
-    details.innerHTML = `
-    <p>${product.name} (${product.variant.size})</p>
-    <p>${product.quantity}</p>
-    <p>${product.price * product.quantity} zł</p>`;
-
-    quickBasketContent.appendChild(details);
+  storedBasket.forEach((product, idx) => {
     total += product.price * product.quantity;
+
+    quickBasketContent.innerHTML += `
+      <div class="quickBasketItems" data-index="${idx}">
+        <p>${product.name} (${product.variant.size})</p>
+          <div class="quantityControls">
+            <button class="decreaseQuantityItem" data-index="${idx}">-
+            </button>
+            <span>${product.quantity}</span>
+            <button class="increaseQuantityItem" data-index="${idx}">+</button>
+          </div>
+          <p>${product.price * product.quantity} zł</p>
+          <button class="removeItem" data-index="${idx}">Usuń</button>
+      </div>
+      `;
   });
 
   if (storedBasket.length > 0) {
-    const totalSpan = document.createElement("span");
-    totalSpan.classList.add("quickBasketTotal");
-    totalSpan.textContent = `Suma: ${total} zł`;
-
-    const orderBtn = document.createElement("button");
-    orderBtn.classList.add("quickBasketOrder");
-    orderBtn.textContent = "Zamówienie";
-
-    quickBasketContent.appendChild(totalSpan);
-    quickBasketContent.appendChild(orderBtn);
+    quickBasketContent.innerHTML += `
+    <span class="quickBasketTotal">Suma: ${total} zł</span>
+    <button class="quickBasketOrder">Zamówienie</button>
+    <button class="clearBasket">Wyczyść koszyk</button>
+  `;
   }
+
+  quickBasketContent
+    .querySelectorAll(".increaseQuantityItem")
+    .forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const idx = btn.dataset.index;
+        storedBasket[idx].quantity++;
+        localStorage.setItem("basket", JSON.stringify(storedBasket));
+        renderQuickBasket();
+      });
+    });
+
+  quickBasketContent
+    .querySelectorAll(".decreaseQuantityItem")
+    .forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const idx = btn.dataset.index;
+        if (storedBasket[idx].quantity > 1) {
+          storedBasket[idx].quantity--;
+        } else {
+          storedBasket.splice(idx, 1);
+        }
+        localStorage.setItem("basket", JSON.stringify(storedBasket));
+        renderQuickBasket();
+      });
+    });
+
+  quickBasketContent.querySelectorAll(".removeItem").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const idx = btn.dataset.index;
+      storedBasket.splice(idx, 1);
+      localStorage.setItem("basket", JSON.stringify(storedBasket));
+      renderQuickBasket();
+    });
+  });
+
+  quickBasketContent
+    .querySelector(".clearBasket")
+    .addEventListener("click", () => {
+      localStorage.removeItem("basket");
+      renderQuickBasket();
+    });
 }
 
 document.addEventListener("DOMContentLoaded", () => {
