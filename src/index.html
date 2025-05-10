@@ -26,6 +26,11 @@
                     <li><a class="header-tabs-link" href="index.html">Kontakt</a></li>
                 </ul>
                 <div class="mobile-menu">
+                    <button class="auth-btn">
+                        <svg class="auth-icon">
+                            <use></use>
+                        </svg>
+                    </button>
                     <button class="basket-btn">
                         <svg class="basket-icon">
                             <use></use>
@@ -102,12 +107,31 @@
             <div class="quickBasketDetails"></div>
         </div>
     </div>
+    <div class="backdrop isHidden" dataAuth>
+        <div class="authForm">
+            <button class="modalAuthClose"></button>
+            <h2 id="auth-title">Zaloguj się</h2>
+            <form id="auth-form">
+                <input type="email" name="email" placeholder="Adres email" id="email-field" class="hidden" />
+                <input type="text" name="username" placeholder="Nazwa użytkownika" required />
+                <input type="password" name="password" placeholder="Hasło użytkownika" required />
+                <button type="submit">Submit</button>
+            </form>
+            <label class="auth-slider" for="toggle-auth">
+                <input type="checkbox" id="toggle-auth" class="toggle-checkbox" />
+                <span class="slider-background">
+                    <span class="slider-text toggle-switch-reg">Kliknij aby zalogować</span>
+                    <span class="slider-text toggle-switch-log">Kliknij aby zarejestrować</span>
+                </span>
+            </label>
+        </div>
+    </div>
     </div>
     <script defer type="module" src="./scripts/productsDb.mjs"></script>
     <script defer type="module" src="./scripts/modal.mjs"></script>
     <script defer type="module" src="./scripts/slider.mjs"></script>
     <script defer type="module" src="./scripts/changingHeaderBg.mjs"></script>
-
+    <script defer type="module" src="./scripts/authModal.mjs"></script>
 </body>
 
 </html>

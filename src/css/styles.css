@@ -53,12 +53,14 @@
   color: #fff;
 }
 
-.basket-btn {
+.basket-btn,
+.auth-btn {
   border: none;
   cursor: pointer;
 }
 
-.basket-icon {
+.basket-icon,
+.auth-icon {
   width: 32px;
   height: 32px;
 }
@@ -90,6 +92,10 @@
   pointer-events: none;
 }
 
+.hidden {
+  display: none;
+}
+
 .backdrop {
   position: fixed;
   top: 0%;
@@ -104,6 +110,16 @@
 }
 
 .modal {
+  position: fixed;
+  top: 25%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 400px;
+  height: 400px;
+  background: #fff;
+}
+
+.authForm {
   position: fixed;
   top: 25%;
   left: 50%;
@@ -189,4 +205,83 @@
 .shop-list-item {
   width: 320px;
   height: 400px;
+}
+
+/* Ukrycie inputa */
+.toggle-checkbox {
+  display: none;
+}
+
+/* Wrapper slidera */
+.auth-slider {
+  display: inline-block;
+  position: relative;
+  width: 60px;
+  height: 24px;
+}
+
+/* Tło suwaka */
+.slider-background {
+  background-color: lightblue;
+  border-radius: 34px;
+  height: 100%;
+  width: 100%;
+  display: block;
+  position: relative;
+}
+
+/* Kulka przesuwająca się */
+.slider-background::after {
+  content: "";
+  position: absolute;
+  height: 16px;
+  width: 16px;
+  left: 4px;
+  top: 4px;
+  background-color: navy;
+  border-radius: 50%;
+  transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+/* Zmiana koloru tła i przesunięcie kulki */
+.toggle-checkbox:checked + .slider-background {
+  background-color: lightsalmon;
+}
+
+.toggle-checkbox:checked + .slider-background::after {
+  transform: translateX(32px); /* przesuwa kulkę w prawo */
+  background-color: maroon;
+}
+
+/* Teksty */
+.slider-text {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 0.7rem;
+  white-space: nowrap;
+  pointer-events: none;
+}
+
+.toggle-switch-reg {
+  left: 70px;
+  color: navy;
+}
+
+.toggle-switch-log {
+  left: 70px;
+  color: brown;
+  display: none;
+}
+
+.toggle-checkbox:checked ~ .slider-background .toggle-switch-reg {
+  display: none;
+}
+
+.toggle-checkbox:checked ~ .slider-background .toggle-switch-log {
+  display: inline-block;
+}
+
+.no-scroll {
+  overflow: hidden;
 }
