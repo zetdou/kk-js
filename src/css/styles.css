@@ -54,7 +54,9 @@
 }
 
 .basket-btn,
-.auth-btn {
+.auth-btn,
+.google-btn,
+.fb-btn {
   border: none;
   cursor: pointer;
 }
