@@ -5,6 +5,7 @@ import {
   GoogleAuthProvider,
   FacebookAuthProvider,
 } from "firebase/auth";
+import axios from "axios";
 
 const firebaseConfig = {
   apiKey: process.env.FIREBASE_API_KEY,
@@ -18,15 +19,30 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 auth.languageCode = "en";
+
 const googleProvider = new GoogleAuthProvider();
+const fbProvider = new FacebookAuthProvider();
+
+const sentIdTokenToBackend = async (idToken) => {
+  try {
+    const res = await axios.post("http://127.0.0.1:3000/users/firebase-login", {
+      idToken,
+    });
+
+    const { token } = res.data;
+    localStorage.setItem("jwt", token);
+  } catch (err) {
+    console.error(err.response?.data || err.message);
+  }
+};
 
 const googleLogin = document.getElementById("google-signin");
 googleLogin.addEventListener("click", () => {
   signInWithPopup(auth, googleProvider)
-    .then((result) => {
-      const credential = GoogleAuthProvider.credentialFromResult(result);
-      const token = credential.accessToken;
+    .then(async (result) => {
       const user = result.user;
+      const idToken = await user.getIdToken();
+      await sentIdTokenToBackend(idToken);
     })
     .catch((error) => {
       const errorCode = error.code;
@@ -36,12 +52,10 @@ googleLogin.addEventListener("click", () => {
     });
 });
 
-const fbProvider = new FacebookAuthProvider();
-
 const fbLogin = document.getElementById("fb-signin");
 fbLogin.addEventListener("click", () => {
   signInWithPopup(auth, fbProvider)
-    .then((result) => {
+    .then(async (result) => {
       const user = result.user;
       const credential = FacebookAuthProvider.credentialFromResult(result);
       const accessToken = credential.accessToken;
