@@ -25,6 +25,14 @@
                     <li><a class="header-tabs-link" href="index.html">O nas</a></li>
                     <li><a class="header-tabs-link" href="index.html">Kontakt</a></li>
                 </ul>
+                <div class="user-info hidden">
+                    <button class="logout-btn">
+                        <svg class="logout-icon">
+                            <use></use>
+                        </svg>
+                    </button>
+                    <span class="user-greeting"></span>
+                </div>
                 <div class="mobile-menu">
                     <button class="auth-btn">
                         <svg class="auth-icon">
@@ -135,6 +143,7 @@
     <script defer type="module" src="./scripts/modal.mjs"></script>
     <script defer type="module" src="./scripts/slider.mjs"></script>
     <script defer type="module" src="./scripts/changingHeaderBg.mjs"></script>
+    <script defer type="module" src="./scripts/saveAuthData.mjs"></script>
     <script defer type="module" src="./scripts/authModal.mjs"></script>
     <script defer type="module" src="./scripts/firebaseAuth.mjs"></script>
 </body>

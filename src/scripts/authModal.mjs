@@ -1,4 +1,5 @@
 import axios from "axios";
+import { saveAuthData } from "./saveAuthData.mjs";
 
 const authModal = document.querySelector("[dataAuth]");
 const authModalOpen = document.querySelector(".auth-btn");
@@ -56,13 +57,13 @@ authForm.addEventListener("submit", async (ev) => {
     console.log(res.data);
 
     if (token) {
-      localStorage.setItem("authToken", token);
-      localStorage.setItem("authUser", JSON.stringify(user));
+      saveAuthData(token, user);
       alert(
         `Successully ${isLogin ? `logged in` : `registered`} as ${
           user.username
         }`
       );
+      checkAuthState();
     } else {
       alert(
         "Registration successfull Please verify your email before logging in!"
@@ -74,3 +75,28 @@ authForm.addEventListener("submit", async (ev) => {
     alert(message);
   }
 });
+
+const checkAuthState = () => {
+  const token = localStorage.getItem("authToken");
+  const user = JSON.parse(localStorage.getItem("authUser"));
+
+  if (token && user) {
+    showLoggedIn(user.username);
+  } else {
+    showLoggedOut();
+  }
+};
+
+const userGreetingAndLogoutWrapper = document.querySelector(".user-info");
+const userWelcomeText = document.querySelector(".user-greeting");
+
+function showLoggedIn(username) {
+  userWelcomeText.textContent = `Witaj, ${username}!`;
+  userGreetingAndLogoutWrapper.classList.remove("hidden");
+
+  authModalOpen.classList.add("hidden");
+}
+
+function showLoggedOut() {
+  userGreetingAndLogoutWrapper.classList.add("hidden");
+}

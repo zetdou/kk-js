@@ -6,6 +6,7 @@ import {
   FacebookAuthProvider,
 } from "firebase/auth";
 import axios from "axios";
+import { saveAuthData } from "./saveAuthData.mjs";
 
 const firebaseConfig = {
   apiKey: process.env.FIREBASE_API_KEY,
@@ -29,8 +30,8 @@ const sentIdTokenToBackend = async (idToken) => {
       idToken,
     });
 
-    const { token } = res.data;
-    localStorage.setItem("jwt", token);
+    const { token, user } = res.data;
+    saveAuthData(token, user);
   } catch (err) {
     console.error(err.response?.data || err.message);
   }

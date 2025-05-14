@@ -56,13 +56,15 @@
 .basket-btn,
 .auth-btn,
 .google-btn,
-.fb-btn {
+.fb-btn,
+.logout-btn {
   border: none;
   cursor: pointer;
 }
 
 .basket-icon,
-.auth-icon {
+.auth-icon,
+.logout-btn {
   width: 32px;
   height: 32px;
 }
