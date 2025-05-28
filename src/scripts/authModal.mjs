@@ -100,3 +100,7 @@ function showLoggedIn(username) {
 function showLoggedOut() {
   userGreetingAndLogoutWrapper.classList.add("hidden");
 }
+
+document.addEventListener("DOMContentLoaded", () => {
+  checkAuthState();
+});
