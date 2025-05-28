@@ -17,7 +17,7 @@ const openAuthModal = () => {
   updateFormMode();
 };
 
-const closeAuthModal = () => {
+export const closeAuthModal = () => {
   authModal.classList.toggle("isHidden");
   document.body.classList.remove("no-scroll");
   authForm.reset();
@@ -76,7 +76,7 @@ authForm.addEventListener("submit", async (ev) => {
   }
 });
 
-const checkAuthState = () => {
+export const checkAuthState = () => {
   const token = localStorage.getItem("authToken");
   const user = JSON.parse(localStorage.getItem("authUser"));
 

@@ -6,6 +6,7 @@ import {
   FacebookAuthProvider,
 } from "firebase/auth";
 import axios from "axios";
+import { checkAuthState, closeAuthModal } from "./authModal.mjs";
 import { saveAuthData } from "./saveAuthData.mjs";
 
 const firebaseConfig = {
@@ -32,6 +33,8 @@ const sentIdTokenToBackend = async (idToken) => {
 
     const { token, user } = res.data;
     saveAuthData(token, user);
+    checkAuthState();
+    closeAuthModal();
   } catch (err) {
     console.error(err.response?.data || err.message);
   }
