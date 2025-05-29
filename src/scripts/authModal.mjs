@@ -1,4 +1,5 @@
 import axios from "axios";
+import { jwtDecode } from "jwt-decode";
 import { saveAuthData } from "./saveAuthData.mjs";
 
 const authModal = document.querySelector("[dataAuth]");
@@ -81,7 +82,19 @@ export const checkAuthState = () => {
   const user = JSON.parse(localStorage.getItem("authUser"));
 
   if (token && user) {
-    showLoggedIn(user.username);
+    try {
+      const decoded = jwtDecode(token);
+      const currentTime = Date.now() / 1000;
+
+      if (decoded.exp < currentTime) {
+        logoutUser();
+      } else {
+        showLoggedIn(user.username);
+      }
+    } catch (err) {
+      console.error("Invalid token:", err);
+      logoutUser();
+    }
   } else {
     showLoggedOut();
   }
@@ -106,7 +119,8 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 const userLogOut = document.querySelector(".logout-btn");
-userLogOut.addEventListener("click", async () => {
+
+async function logoutUser() {
   const logOutPath = "http://127.0.0.1:3000/users/logout";
   const token = localStorage.getItem("authToken");
 
@@ -123,4 +137,6 @@ userLogOut.addEventListener("click", async () => {
   } catch (err) {
     console.error("Error", err);
   }
-});
+}
+
+userLogOut.addEventListener("click", logoutUser);
