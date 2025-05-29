@@ -104,3 +104,23 @@ function showLoggedOut() {
 document.addEventListener("DOMContentLoaded", () => {
   checkAuthState();
 });
+
+const userLogOut = document.querySelector(".logout-btn");
+userLogOut.addEventListener("click", async () => {
+  const logOutPath = "http://127.0.0.1:3000/users/logout";
+  const token = localStorage.getItem("authToken");
+
+  if (!token) return;
+
+  try {
+    const res = await axios.get(logOutPath, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    localStorage.clear();
+    checkAuthState();
+  } catch (err) {
+    console.error("Error", err);
+  }
+});
