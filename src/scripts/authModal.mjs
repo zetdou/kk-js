@@ -1,4 +1,5 @@
 import axios from "axios";
+import { getAuth, signOut } from "firebase/auth";
 import { jwtDecode } from "jwt-decode";
 import { saveAuthData } from "./saveAuthData.mjs";
 
@@ -59,6 +60,7 @@ authForm.addEventListener("submit", async (ev) => {
 
     if (token) {
       saveAuthData(token, user);
+      localStorage.setItem("isGoogle", "false");
       alert(
         `Successully ${isLogin ? `logged in` : `registered`} as ${
           user.username
@@ -123,15 +125,23 @@ const userLogOut = document.querySelector(".logout-btn");
 async function logoutUser() {
   const logOutPath = "http://127.0.0.1:3000/users/logout";
   const token = localStorage.getItem("authToken");
+  const isGoogle = localStorage.getItem("isGoogle") === "true";
 
   if (!token) return;
 
   try {
-    const res = await axios.get(logOutPath, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
+    if (isGoogle) {
+      const auth = getAuth();
+      await signOut(auth);
+      console.log("wylogowano z firebase");
+    } else {
+      const res = await axios.get(logOutPath, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      console.log("wylogowano z backendu");
+    }
     localStorage.clear();
     checkAuthState();
   } catch (err) {

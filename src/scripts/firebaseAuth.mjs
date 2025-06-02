@@ -33,6 +33,7 @@ const sentIdTokenToBackend = async (idToken) => {
 
     const { token, user } = res.data;
     saveAuthData(token, user);
+    localStorage.setItem("isGoogle", "true");
     checkAuthState();
     closeAuthModal();
   } catch (err) {
