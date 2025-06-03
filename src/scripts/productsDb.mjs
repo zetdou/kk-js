@@ -18,6 +18,7 @@ export const fetchProducts = async () => {
 export const createProductCart = async () => {
   await fetchProducts();
   const shopList = document.querySelector(".shop-list");
+  if (!shopList) return;
   shopList.innerHTML = "";
 
   products.forEach((element) => {

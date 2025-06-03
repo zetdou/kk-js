@@ -5,11 +5,175 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@3.4.1/dist/tailwind.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="./css/styles.css" />
 </head>
 
 <body>
+    <main>
+        <div class="container">
+            <header class="header">
+                <nav class="nav-menu">
+                    <div class="logo-div">
+                        <a class="logo-link" href="index.html">
+                            <svg class="logo-icon">
+                                <use href="images/icons.svg#icon-logo-small"></use>
+                            </svg>
+                        </a>
+                    </div>
+                    <ul class="header-tabs">
+                        <li><a class="header-tabs-link" href="index.html">Główna</a></li>
+                        <li><a class="header-tabs-link" href="index.html">Sklep</a></li>
+                        <li><a class="header-tabs-link" href="index.html">O nas</a></li>
+                        <li><a class="header-tabs-link" href="index.html">Kontakt</a></li>
+                    </ul>
+                    <div class="user-info hidden">
+                        <button class="logout-btn">
+                            WYLOGUJ
+                        </button>
+                        <span class="user-greeting"></span>
+                    </div>
+                    <div class="mobile-menu">
+                        <button class="auth-btn">
+                            <svg class="auth-icon">
+                                <use></use>
+                            </svg>
+                        </button>
+                        <button class="basket-btn">
+                            <svg class="basket-icon">
+                                <use></use>
+                            </svg>
+                        </button>
+                        <button class="mobile-menu-btn" dataMobileMenu>
+                            <svg class="menu-icon">
+                                <use href="images/icons.svg#icon-menu"></use>
+                            </svg>
+                        </button>
+                    </div>
+                </nav>
+            </header>
+            <div class="slider">
+                <div class="slider-content">
+                    <img src="./images/komitet1.jpg" alt="img1" />
+                    <div class="slider-text">
+                        <h1>Lorem Ipsum</h1>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                    </div>
+                </div>
+                <div class="slider-content">
+                    <img src="./images/komitet2.jpg" alt="img2" />
+                    <div class="slider-text">
+                        <h1>Lorem Ipsum</h1>
+                        <p>Sed gravida tincidunt massa id pretium.</p>
+                    </div>
+                </div>
+                <div class="slider-content">
+                    <img src="./images/komitet3.jpg" alt="img3" />
+                    <div class="slider-text">
+                        <h1>Lorem Ipsum</h1>
+                        <p>Sed hendrerit, ante ac egestas suscipit, augue libero semper eros, quis ultrices ex magna nec
+                            sapien.</p>
+                    </div>
+                </div>
+                <div class="slider-content">
+                    <img src="./images/komitet4.jpg" alt="img4" />
+                    <div class="slider-text">
+                        <h1>Lorem Ipsum</h1>
+                        <p>Duis leo nulla, fringilla nec arcu eu, dapibus sollicitudin sapien.</p>
+                    </div>
+                </div>
+                <div class="slider-content">
+                    <img src="./images/komitet5.jpg" alt="img5" />
+                    <div class="slider-text">
+                        <h1>Lorem Ipsum</h1>
+                        <p>Nulla nec odio tincidunt, interdum est at, efficitur erat.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <section class="order-summary">
+            <h2>Podsumowanie zamówienia</h2>
 
+            <!-- Kontener na tabelę produktów -->
+            <div id="orderTableContainer">
+                <!-- Tabela zostanie wygenerowana przez JS -->
+            </div>
+
+            <!-- Formularz kontaktowy dla niezalogowanych -->
+            <form id="guestForm" class="isHidden">
+                <h3>Dane do kontaktu</h3>
+                <label>
+                    Imię i nazwisko
+                    <input type="text" name="name" required />
+                </label>
+                <label>
+                    E-mail
+                    <input type="email" name="email" required />
+                </label>
+                <label>
+                    Numer telefonu
+                    <input type="tel" name="phone" required />
+                </label>
+            </form>
+
+            <!-- Przycisk ZAMÓW -->
+            <button id="confirmOrderBtn">ZAMÓW</button>
+
+            <!-- Komunikat po zamówieniu -->
+            <div id="orderConfirmationMessage" class="isHidden">
+                <h3>Dziękujemy za zamówienie!</h3>
+                <p>Wysłaliśmy szczegóły na podany adres e-mail.</p>
+            </div>
+        </section>
+    </main>
+    <footer></footer>
+    <div class="backdrop isHidden" modalOpen>
+        <div class="modal">
+            <button class="closeBtn" modalClose>
+                <svg class="closeBtnIcon">
+                    <use></use>
+                </svg>
+            </button>
+            <div class="modal-content"></div>
+        </div>
+    </div>
+    <div class="backdrop isHidden" dataBasket>
+        <div class="quickBasket">
+            <button class="quickBasketBtn"></button>
+            <button class="quickBasketHide"></button>
+            <div class="quickBasketDetails"></div>
+        </div>
+    </div>
+    <div class="backdrop isHidden" dataAuth>
+        <div class="authForm">
+            <button class="modalAuthClose"></button>
+            <h2 id="auth-title">Zaloguj się</h2>
+            <form id="auth-form">
+                <input type="email" name="email" placeholder="Adres email" id="email-field" class="hidden" />
+                <input type="text" name="username" placeholder="Nazwa użytkownika" required />
+                <input type="password" name="password" placeholder="Hasło użytkownika" required />
+                <button type="submit">Submit</button>
+            </form>
+            <label class="auth-slider" for="toggle-auth">
+                <input type="checkbox" id="toggle-auth" class="toggle-checkbox" />
+                <span class="slider-background">
+                    <span class="slider-text toggle-switch-reg">Kliknij aby zalogować</span>
+                    <span class="slider-text toggle-switch-log">Kliknij aby zarejestrować</span>
+                </span>
+            </label>
+            <div class="otherMethodsWrapper">
+                <button id="google-signin" class="google-btn">GOOGLE</button>
+                <button id="fb-signin" class="fb-btn">FACEBOOK</button>
+            </div>
+        </div>
+    </div>
+    <script defer type="module" src="./scripts/productsDb.mjs"></script>
+    <script defer type="module" src="./scripts/modal.mjs"></script>
+    <script defer type="module" src="./scripts/slider.mjs"></script>
+    <script defer type="module" src="./scripts/changingHeaderBg.mjs"></script>
+    <script defer type="module" src="./scripts/saveAuthData.mjs"></script>
+    <script defer type="module" src="./scripts/authModal.mjs"></script>
+    <script defer type="module" src="./scripts/firebaseAuth.mjs"></script>
 </body>
 
 </html>

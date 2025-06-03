@@ -2,19 +2,22 @@ import { products } from "./productsDb.mjs";
 
 // Open quick shopping modal window
 const shopList = document.querySelector(".shop-list");
-shopList.addEventListener("click", (ev) => {
-  const modal = document.querySelector("[modalOpen]");
-  const modalClose = document.querySelector("[modalClose]");
-  const openBtn = ev.target.closest(".openCartModal");
 
-  const productId = openBtn.dataset.id;
-  const product = products.find((item) => item.id === productId);
-  createModalContent(product);
+if (shopList) {
+  shopList.addEventListener("click", (ev) => {
+    const modal = document.querySelector("[modalOpen]");
+    const modalClose = document.querySelector("[modalClose]");
+    const openBtn = ev.target.closest(".openCartModal");
 
-  if (openBtn) {
-    openModal(modal, modalClose);
-  }
-});
+    const productId = openBtn.dataset.id;
+    const product = products.find((item) => item.id === productId);
+    createModalContent(product);
+
+    if (openBtn) {
+      openModal(modal, modalClose);
+    }
+  });
+}
 
 function openModal(modal, modalClose) {
   modal.classList.toggle("isHidden");
@@ -165,7 +168,7 @@ function renderQuickBasket() {
   if (storedBasket.length > 0) {
     quickBasketContent.innerHTML += `
     <span class="quickBasketTotal">Suma: ${total} zł</span>
-    <button class="quickBasketOrder">Zamówienie</button>
+    <button class="quickBasketOrder"><a href="../confirmation.html">Zamówienie</a></button>
     <button class="clearBasket">Wyczyść koszyk</button>
   `;
   }
